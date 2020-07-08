@@ -7,7 +7,7 @@ Homework Assignment #5: Work Day Scheduler.
 
 -Screenshot
 
--Link to Deployed Project
+-Link to Deployed Project (https://gafelton.github.io/homework-work-day-scheduler-5/)
 
 -Details/Description
 
