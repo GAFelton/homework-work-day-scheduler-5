@@ -19,18 +19,17 @@ $(document).ready(function () {
         rowDiv.addClass("row")
         rowDiv.attr("data-thisHour", hours[i]);
 
-        //create div, assign classes .col-md-2 .hour
+        //create div, assign classes .col-md-1 .hour
         var hourDiv = $("<div>");
-        hourDiv.addClass("col-md-2 hour float-left");
+        hourDiv.addClass("col-md-1 hour float-left");
         hourDiv.text(hours[i]);
-        //create div, assign classes .col-md-8 .time-bock
+        //create div, assign classes .col-md-10 .time-bock
         var timeBlockDiv = $("<div>");
-        timeBlockDiv.addClass("col-md-8 time-block");
+        timeBlockDiv.addClass("col-md-10 time-block");
 
-        //create div, assign classes .col-md-2 .saveBtn
+        //create div, assign classes .col-md-1 .saveBtn
         var saveBtnDiv = $("<div>");
-        saveBtnDiv.addClass("col-md-2 saveBtn float-right");
-        saveBtnDiv.text("Save");
+        saveBtnDiv.addClass("col-md-1 saveBtn float-right far fa-save fa-3x");
 
         //append #row-(thisHour) to dayContainer sequentially.
         dayContainer.append(rowDiv);
@@ -41,13 +40,21 @@ $(document).ready(function () {
         //append .saveBtn to #row-(thisHour)
         rowDiv.append(saveBtnDiv);
 
-        if (moment().format("h a") < hours[i].substring(0,1)) {
+        // console.log ( date & type)
+        console.log(moment().format("h") + " is the time, with a type of: " +  typeof(moment().format("h")));
+
+
+        // parseInt() on hour before doing any mathematical comparison.
+        //time can be returned in MANY different formats. AMPM, military, time zones.
+        //Try using ASCII values. ASCII table for numbers.
+
+        if (moment().format("h") < hours[i].substring(0,1)) {
             timeBlockDiv.addClass("past");
         }
-        if (moment().format("h a") === hours[i]) {
+        if (moment().format("h") === hours[i]) {
             timeBlockDiv.addClass("present");
         }
-        if (moment().format("h a") > hours[i]) {
+        if (moment().format("h") > hours[i]) {
             timeBlockDiv.addClass("future");
         }
     }
@@ -61,6 +68,7 @@ $(document).ready(function () {
 });
 /*
 PSEUDOCODE FOR WORK DAY SCHEDULER
+Use JavaScript Date Functions ? Or Moment JS?
 On page open:
     -display current day at top of calendar.
     -pull events from localStorage.
