@@ -5,6 +5,20 @@ $(document).ready(function () {
     var dayContainer = $("#dayContainer");
     var todayIs = moment().format('dddd, MMMM Do YYYY');
     var hours = ["9:00", "10:00", "11:00", "12:00", "1:00", "2:00", "3:00", "4:00", "5:00"]
+    var currentHour = moment().format("h");
+    var hoursOnly = hours.map(function(value){
+        var n = value.replace(":00", "");
+        return n;
+    });
+    console.log(currentHour);
+    console.log(hoursOnly);
+    var hoursIndex = hoursOnly.findIndex(function(value, index){
+        if (value === currentHour){
+        return index;
+        };
+    });
+    console.log(hoursIndex);
+    console.log(moment().format("h") + " is the time, with a type of: " +  typeof(moment().format("h")));
 
 
     currentDay.text(todayIs);
@@ -41,20 +55,18 @@ $(document).ready(function () {
         rowDiv.append(saveBtnDiv);
 
         // console.log ( date & type)
-        console.log(moment().format("h") + " is the time, with a type of: " +  typeof(moment().format("h")));
-
 
         // parseInt() on hour before doing any mathematical comparison.
         //time can be returned in MANY different formats. AMPM, military, time zones.
         //Try using ASCII values. ASCII table for numbers.
 
-        if (moment().format("h") < hours[i].substring(0,1)) {
+        if (i < hoursIndex) {
             timeBlockDiv.addClass("past");
         }
-        if (moment().format("h") === hours[i]) {
+        if (i === hoursIndex) {
             timeBlockDiv.addClass("present");
         }
-        if (moment().format("h") > hours[i]) {
+        if (i > hoursIndex) {
             timeBlockDiv.addClass("future");
         }
     }
