@@ -97,7 +97,7 @@ $(document).ready(function () {
 
             var timeBlockTextInput = $("<textarea>");
             // timeBlockTextInput.addClass("form-input");
-            // timeBlockTextInput.attr("rows", 3);
+            timeBlockTextInput.attr("rows", 3);
             timeBlockTextInput.attr("data-textInput", i);
 
             //create div, assign classes .col-md-1 .saveBtn
