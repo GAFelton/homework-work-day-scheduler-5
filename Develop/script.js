@@ -24,8 +24,8 @@ $(document).ready(function () {
 
     currentDay.text(todayIs);
     // Pull events from localStorage.
-   
-   
+
+
     // function initLocalStorage() {
     //     var storedText = JSON.parse(localStorage.getItem("allNotes"));
 
@@ -53,29 +53,44 @@ $(document).ready(function () {
                          IMPORTANT! IMPLEMENT BELOW:
     What if each saveBtn added its own object to localStorage?
     */
+    function pullNotes() {
+        for (i = 0; i < hours.length; i++) {
+            var object1 = JSON.parse(localStorage.getItem(("note-" + i)));
+            object1.forEach(function(obj) {
+                console.log(obj.note);
+            });
+            // noteToSet = noteToSet.note;
+        //    $(".textarea-" + i).text();
 
-    function storeNote(){
-        var dataAttr = $(this).data("data-SaveBtn");
-        var thisNote = {
-            "dataIndex": dataAttr,
-            "note": $(".time-block-" + dataAttr).textContent
+            console.log(noteToSet);
+            // $(".textarea-" + i).text(noteToSet.noteToSetContent.val);
         }
-        localStorage.setItem("note-" + dataAttr, JSON.stringify(thisNote));
-    }
-   /*
-    var dataAttr = this.attr("data-Savebtn");
-    var thisnote = {
-        "dataIndex": dataAttr,
-        "note": timeBlockDiv.textContent
     }
 
-    localStorage.setItem("note-"+ dataAttr, JSON.stringify(thisnote))
-
-    When calling, forloop.
-    for i = 0; i<hours.length; i++) {
-        JSON.parse(localStorage.getItem("note-" + i));
+    function storeNote(index) {
+        console.log(index);
+        var noteInput = $(".textarea-" + index).val();
+        console.log(noteInput);
+        var thisNote = {
+            "dataIndex": index,
+            "note": noteInput
+        }
+        localStorage.setItem(("note-" + index), JSON.stringify(thisNote));
     }
-    */
+    /*
+     var dataAttr = this.attr("data-Savebtn");
+     var thisnote = {
+         "dataIndex": dataAttr,
+         "note": timeBlockDiv.textContent
+     }
+ 
+     localStorage.setItem("note-"+ dataAttr, JSON.stringify(thisnote))
+ 
+     When calling, forloop.
+     for i = 0; i<hours.length; i++) {
+         JSON.parse(localStorage.getItem("note-" + i));
+     }
+     */
 
     //TIMEBLOCK BUILDER
     // for loop through hours.length
@@ -96,7 +111,7 @@ $(document).ready(function () {
             timeBlockDiv.attr("data-timeBlock", i);
 
             var timeBlockTextInput = $("<textarea>");
-            // timeBlockTextInput.addClass("form-input");
+            timeBlockTextInput.addClass("textarea-" + i);
             timeBlockTextInput.attr("rows", 3);
             timeBlockTextInput.attr("data-textInput", i);
 
@@ -104,7 +119,12 @@ $(document).ready(function () {
             var saveBtnDiv = $("<button>");
             saveBtnDiv.addClass("col-md-1 saveBtn float-right far fa-save fa-3x");
             saveBtnDiv.attr("data-SaveBtn", i);
-            saveBtnDiv.click(storeNote());
+            saveBtnDiv.on("click", function () {
+                var noteIndex = $(this).attr("data-SaveBtn");
+                console.log(noteIndex);
+                storeNote(noteIndex);
+            });
+            // saveBtnDiv.on("click", storeNote($("data-SaveBtn")));
 
             // if (allNotes.find(function () {
             //     i === dataIndex;
@@ -140,7 +160,7 @@ $(document).ready(function () {
 
     // initLocalStorage();
     initSchedule();
-
+    pullNotes();
 
 
 
