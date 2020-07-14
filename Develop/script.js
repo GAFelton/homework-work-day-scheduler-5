@@ -1,11 +1,8 @@
 $(document).ready(function () {
-    var pageHeader = $(".display-3");
-    var subTitle = $(".lead");
     var currentDay = $("#currentDay");
     var dayContainer = $("#dayContainer");
     var todayIs = moment().format('dddd, MMMM Do YYYY');
     var hours = ["9:00", "10:00", "11:00", "12:00", "1:00", "2:00", "3:00", "4:00", "5:00"]
-    var allNotes = [];
     var currentHour = moment().format("h");
     var hoursOnly = hours.map(function (value) {
         var n = value.replace(":00", "");
@@ -18,52 +15,19 @@ $(document).ready(function () {
             return index;
         };
     });
-    console.log(hoursIndex);
     console.log(moment().format("h") + " is the time, with a type of: " + typeof (moment().format("h")));
 
 
     currentDay.text(todayIs);
     // Pull events from localStorage.
 
-
-    // function initLocalStorage() {
-    //     var storedText = JSON.parse(localStorage.getItem("allNotes"));
-
-    //     if (storedText !== null) {
-    //         allNotes = storedText;
-    //     }
-    // }
-
-    // function storeNote() {
-    //     var dataAttr = this.dataSaveBtn;
-    //     var note = "data-timeBlock", dataAttr;
-
-    //     var noteContent = {
-    //         "dataIndex": dataAttr,
-    //         "note": note
-    //     }
-
-    //     allNotes.push(noteContent);
-    //     localStorage.setItem("allNotes", JSON.stringify(allNotes));
-    // }
-    /*
-    To store in localStorage:
-    save button creates a new object to add to the allNotes array. Object has parameters dataIndex and note.
-    
-                         IMPORTANT! IMPLEMENT BELOW:
-    What if each saveBtn added its own object to localStorage?
-    */
     function pullNotes() {
         for (i = 0; i < hours.length; i++) {
-            var object1 = JSON.parse(localStorage.getItem(("note-" + i)));
-            object1.forEach(function(obj) {
-                console.log(obj.note);
-            });
-            // noteToSet = noteToSet.note;
-        //    $(".textarea-" + i).text();
-
-            console.log(noteToSet);
-            // $(".textarea-" + i).text(noteToSet.noteToSetContent.val);
+            var noteToSet = JSON.parse(localStorage.getItem(("note-" + i)));
+            if (noteToSet !== null) {
+                console.log(noteToSet.note);
+                $(".textarea-" + i).text(noteToSet.note);
+            }
         }
     }
 
@@ -77,20 +41,6 @@ $(document).ready(function () {
         }
         localStorage.setItem(("note-" + index), JSON.stringify(thisNote));
     }
-    /*
-     var dataAttr = this.attr("data-Savebtn");
-     var thisnote = {
-         "dataIndex": dataAttr,
-         "note": timeBlockDiv.textContent
-     }
- 
-     localStorage.setItem("note-"+ dataAttr, JSON.stringify(thisnote))
- 
-     When calling, forloop.
-     for i = 0; i<hours.length; i++) {
-         JSON.parse(localStorage.getItem("note-" + i));
-     }
-     */
 
     //TIMEBLOCK BUILDER
     // for loop through hours.length
@@ -189,3 +139,20 @@ Click on timeblock:
 // parseInt() on hour before doing any mathematical comparison.
 //time can be returned in MANY different formats. AMPM, military, time zones.
 //Try using ASCII values. ASCII table for numbers.
+
+
+/*
+Each timeblock creates its own localStorage object.
+ var dataAttr = this.attr("data-Savebtn");
+ var thisnote = {
+     "dataIndex": dataAttr,
+     "note": timeBlockDiv.textContent
+ }
+
+ localStorage.setItem("note-"+ dataAttr, JSON.stringify(thisnote))
+
+ When calling, forloop.
+ for i = 0; i<hours.length; i++) {
+     JSON.parse(localStorage.getItem("note-" + i));
+ }
+ */
