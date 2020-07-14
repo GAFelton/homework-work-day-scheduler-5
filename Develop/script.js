@@ -50,7 +50,19 @@ $(document).ready(function () {
     To store in localStorage:
     save button creates a new object to add to the allNotes array. Object has parameters dataIndex and note.
     
+                         IMPORTANT! IMPLEMENT BELOW:
     What if each saveBtn added its own object to localStorage?
+    */
+
+    function storeNote(){
+        var dataAttr = $(this).data("data-SaveBtn");
+        var thisNote = {
+            "dataIndex": dataAttr,
+            "note": $(".time-block-" + dataAttr).textContent
+        }
+        localStorage.setItem("note-" + dataAttr, JSON.stringify(thisNote));
+    }
+   /*
     var dataAttr = this.attr("data-Savebtn");
     var thisnote = {
         "dataIndex": dataAttr,
@@ -80,13 +92,18 @@ $(document).ready(function () {
             hourDiv.text(hours[i]);
             //create div, assign classes .col-md-10 .time-bock
             var timeBlockDiv = $("<div>");
-            timeBlockDiv.addClass("col-md-10 time-block");
+            timeBlockDiv.addClass("col-md-10 time-block form-group");
             timeBlockDiv.attr("data-timeBlock", i);
 
+            var timeBlockTextInput = $("<textarea>");
+            // timeBlockTextInput.addClass("form-input");
+            // timeBlockTextInput.attr("rows", 3);
+            timeBlockTextInput.attr("data-textInput", i);
+
             //create div, assign classes .col-md-1 .saveBtn
-            var saveBtnDiv = $("<div>");
+            var saveBtnDiv = $("<button>");
             saveBtnDiv.addClass("col-md-1 saveBtn float-right far fa-save fa-3x");
-            saveBtnDiv.attr("dataSaveBtn", i);
+            saveBtnDiv.attr("data-SaveBtn", i);
             saveBtnDiv.click(storeNote());
 
             // if (allNotes.find(function () {
@@ -101,6 +118,7 @@ $(document).ready(function () {
             rowDiv.append(hourDiv);
             //append .time-block to #row-(thisHour)
             rowDiv.append(timeBlockDiv);
+            timeBlockDiv.append(timeBlockTextInput);
             //append .saveBtn to #row-(thisHour)
             rowDiv.append(saveBtnDiv);
 
@@ -120,7 +138,7 @@ $(document).ready(function () {
         }
     }
 
-    initLocalStorage();
+    // initLocalStorage();
     initSchedule();
 
 
