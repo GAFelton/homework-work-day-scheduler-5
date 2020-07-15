@@ -128,20 +128,20 @@ Below, create timeblocks for standard business hours. Each time block needs data
     -event in localStorage & display text in block
 
 Click on timeblock:
-    Form field to enter event.
-    Save button to save changes to localStorage.
-
+    -Form field to enter event.
+    -Save button to save changes to localStorage.
 */
 
-// Notes for comparing time.
-// console.log ( date & type)
+// NOTES for comparing time.
 
+// console.log ( date & type)
 // parseInt() on hour before doing any mathematical comparison.
 //time can be returned in MANY different formats. AMPM, military, time zones.
 //Try using ASCII values. ASCII table for numbers.
 
 
 /*
+NOTES for saving to/from localStorage.
 Each timeblock creates its own localStorage object.
  var dataAttr = this.attr("data-Savebtn");
  var thisnote = {
