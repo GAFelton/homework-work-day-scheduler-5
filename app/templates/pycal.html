@@ -18,7 +18,7 @@
       href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="Develop/style.css" />
+    <link rel="stylesheet" href="../static/style.css" />
     <title>Work Day Scheduler</title>
   </head>
 
@@ -26,14 +26,23 @@
     <header class="jumbotron">
       <h1 class="display-3">Work Day Scheduler</h1>
       <p class="lead">A simple calendar app for scheduling your work day</p>
-      <p id="currentDay" class="lead"></p>
+      <p id="currentDay" class="lead">{{ todayIs }}</p>
     </header>
     <div class="container" id="dayContainer">
       <!-- Timeblocks go here -->
+      {% block timeblocks %}{% endblock %}
     </div>
-
+    <form action="{{ url_for('home') }}" method="GET">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="isPython" name="isPython" checked>
+        <label class="form-check-label" for="isPython">Calendar via Python?</label>
+      </div>
+      <div>
+        <button type="submit" value="Submit">Submit</button>
+      </div>
+    </form>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="Develop/script.js"></script>
+    <!-- <script src="../static/script.js"></script> -->
   </body>
 </html>

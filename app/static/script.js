@@ -8,8 +8,6 @@ $(document).ready(function () {
         var n = value.replace(":00", "");
         return n;
     });
-    console.log(currentHour);
-    console.log(hoursOnly);
     var hoursIndex = hoursOnly.findIndex(function (value, index) {
         if (value === currentHour) {
             return index;

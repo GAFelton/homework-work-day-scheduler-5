@@ -34,9 +34,9 @@ textarea{
 }
 
 .row {
-  white-space: pre-wrap;
+  white-space: normal;
   height: 80px;
-  border-top: 1px solid white;;
+  border-top: 1px solid white;
 }
 
 .hour {
@@ -62,10 +62,20 @@ textarea{
 }
 
 .saveBtn {
-  /* display: flex; */
+  display: flex;
+  text-align: left;
   border-left: 1px solid black;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
+  background-color: #06AED5;
+  color: white;
+  height: 100%;
+}
+
+.saveIcon {
+  display: flex;
+  position: relative;
+  margin-top: 0px;
   background-color: #06AED5;
   color: white;
   height: 100%;

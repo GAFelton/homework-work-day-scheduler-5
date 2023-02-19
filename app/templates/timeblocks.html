@@ -1,0 +1,26 @@
+{% extends 'pycal.html' %}
+{% block timeblocks %}
+
+{% for i in range(9) %}
+<div class="row" data-thisHour="{{ hours[i] }}">
+  <div class="col-md-1 hour float-left">{{ hours[i] }}</div>
+  <div class="col-md-10 time-block form-group 
+  {% if i < currentHour %}
+  past
+  {% elif i == currentHour %}
+  present
+{% else %}
+  future
+{% endif %}" data-timeBlock="{{ i }}">
+    <textarea class="textarea-{{ i }}" name="note" rows="3" form="storeNoteForm-{{ i }}"
+      data-textInput="{{ i }}">{{ allNotes[i] }}</textarea>
+  </div>
+  <input type="hidden" value="{{ i }}" name="indexOfNote" form="storeNoteForm-{{ i }}">
+  <div class="col-md-1 float-right saveBtn">
+    <form action="{{ url_for('storeNote') }}" id="storeNoteForm-{{ i }}" method="POST"><button
+        class="saveBtn saveIcon far fa-save fa-3x" value="Submit" data-SaveBtn="{{ i }}"
+        type="submit"></button></form>
+  </div>
+</div>
+{% endfor %}
+{% endblock %}
